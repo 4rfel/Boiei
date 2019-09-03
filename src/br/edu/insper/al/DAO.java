@@ -9,19 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAO {
-	private Connection connection = null;
+	private Connection connection;
 	
 	public DAO() {
 	 try {
-		Class.forName("com.mysql.jdbc.Driver");
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	 try {
-		connection = DriverManager.getConnection(
-		"jdbc:mysql://localhost/Boiei", "", "");
-	} catch (SQLException e) {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		connection  = DriverManager.getConnection(
+				"jdbc:mysql://localhost/Boiei", "Arfel", "R4f43!arafle99");
+	} catch (ClassNotFoundException | SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -48,7 +43,25 @@ public class DAO {
 			e.printStackTrace();
 		}
 		return users;
-		}
+	}
+	
+	public void addUser(User user) {
+			try {
+				PreparedStatement stmt;
+				String sql = "INSERT INTO Users" + "(username,password) values(?,?)";
+
+				stmt = connection.prepareStatement(sql);
+				stmt.setString(1,user.getUsername());
+				stmt.setString(2,user.getPassword());
+				stmt.execute();
+				stmt.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	}
 	
 	public List<Post> getListPosts() {
 		List<Post> posts = new ArrayList<Post>();
@@ -74,5 +87,15 @@ public class DAO {
 			e.printStackTrace();
 		}
 		return posts;
+	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
 }
