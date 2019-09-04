@@ -9,9 +9,20 @@
 <body>
 	<br>
 	<h2>Login</h2>
-	<form action="/Login" method="post">
+	<form action="Login" method="post">
 		Username: <br> <input type="text" name="username"> <br>
 		Senha: <br> <input type="password" name="password"> <br>
+		<%
+		String emptyCamps = (String)request.getAttribute("emptyCamps");
+		if(emptyCamps!=null){
+			out.println(emptyCamps + "<br>");
+		}
+		
+		String result = (String)request.getAttribute("loged");
+		if(result!=null){
+			out.println(result + "<br>");
+		}
+%>
 	<input type="submit" name="login">
 	</form>
 	<br>
@@ -21,13 +32,22 @@
 		Username: <br> <input type="text" name="username"> <br>
 		Senha: <br> <input type="password" name="password"> <br>
 		Confirmar Senha: <br> <input type="password" name="passwordCheck">
-		<br>
-	
-	<input type="submit" name="createAccount">
-	
-	</form>
-	<% 
+		<%
+		String validUsername = (String)request.getAttribute("isValidUsername");
+		if(validUsername!=null){
+			out.println(validUsername + "<br>");
+		}
+		String samePassword = (String)request.getAttribute("samePassword");
+		if(validUsername!=null){
+			out.println(validUsername + "<br>");
+		}
+		emptyCamps = (String)request.getAttribute("emptyCamps");
+		if(validUsername!=null){
+			out.println(emptyCamps + "<br>");
+		}
 %>
-	
+		<br>
+	<input type="submit" name="createAccount">
+	</form>
 </body>
 </html>
