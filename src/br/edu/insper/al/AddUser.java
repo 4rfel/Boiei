@@ -3,6 +3,7 @@ package br.edu.insper.al;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,11 +42,18 @@ public class AddUser extends HttpServlet {
 		User user= new User();
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
-		dao.addUser(user);
-		PrintWriter out = response.getWriter();
-		out.println("<html><body>");
-		out.println("adicionado" + user.getUsername());
-		out.println("</body></html>");
+		boolean userCreated = dao.addUser(user);
+		if(userCreated) {
+			PrintWriter out = response.getWriter();
+			int userId = dao.getUserId(user);
+			request.setAttribute("userId", userId);
+			RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
+			rd.forward(request, response);
+		}else {
+			request.setAttribute("isValidUsername", "username ja usado");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request, response);
+		}
 		dao.close();
 	}
 

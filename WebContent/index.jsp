@@ -31,18 +31,18 @@
 	<form action="AddUser" method="post">
 		Username: <br> <input type="text" name="username"> <br>
 		Senha: <br> <input type="password" name="password"> <br>
-		Confirmar Senha: <br> <input type="password" name="passwordCheck">
+		Confirmar Senha: <br> <input type="password" name="passwordCheck"> <br>
 		<%
 		String validUsername = (String)request.getAttribute("isValidUsername");
 		if(validUsername!=null){
 			out.println(validUsername + "<br>");
 		}
 		String samePassword = (String)request.getAttribute("samePassword");
-		if(validUsername!=null){
-			out.println(validUsername + "<br>");
+		if(samePassword!=null){
+			out.println(samePassword + "<br>");
 		}
 		emptyCamps = (String)request.getAttribute("emptyCamps");
-		if(validUsername!=null){
+		if(emptyCamps!=null){
 			out.println(emptyCamps + "<br>");
 		}
 %>

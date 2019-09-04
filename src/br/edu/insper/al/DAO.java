@@ -81,21 +81,30 @@ public class DAO {
 		return users;
 	}
 	
-	public void addUser(User user) {
+	public boolean addUser(User user) {
 		try {
 			PreparedStatement stmt;
-			String sql = "INSERT INTO Users" + "(username,password) values(?,?)";
+			String sql = "SELECT * FROM Users WHERE username=?";
 
 			stmt = connection.prepareStatement(sql);
 			stmt.setString(1,user.getUsername());
-			stmt.setString(2,user.getPassword());
-			stmt.execute();
-			stmt.close();
+			ResultSet rs = stmt.executeQuery();
+			if(!rs.next()) {
+				sql = "INSERT INTO Users" + "(username,password) values(?,?)";
+
+				stmt = connection.prepareStatement(sql);
+				stmt.setString(1,user.getUsername());
+				stmt.setString(2,user.getPassword());
+				stmt.execute();
+				stmt.close();
+				return true;
+			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}	
+		return false;
 	}
 	
 	public List<Post> getListPosts() {

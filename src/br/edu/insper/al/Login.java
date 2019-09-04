@@ -1,6 +1,10 @@
 package br.edu.insper.al;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Array;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +39,37 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		PrintWriter out = response.getWriter();
+
+		String password = request.getParameter("password");
+		String username = request.getParameter("username");
+		if(!password.isEmpty() || !username.isEmpty()) {
+			DAO dao = new DAO();
+			User user= new User();
+			user.setUsername(username);
+			user.setPassword(password);
+			boolean status = dao.login(user);
+			if(status) {
+				int userId = dao.getUserId(user);
+				request.setAttribute("userId", userId);
+				RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
+				rd.forward(request, response);
+//				out.println("<html><body>");
+//				out.println("Logado " + username);
+//				out.println("<br>user id " + userId);
+//				out.println("</body></html>");
+				dao.close();	
+			}else {
+				request.setAttribute("loged", "username ou senha incorretos");
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
+			}
+		}else {
+			request.setAttribute("emptyCamps", "campos vazios");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request, response);
+		}
+
 	}
 
 }
