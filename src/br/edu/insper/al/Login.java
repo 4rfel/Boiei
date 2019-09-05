@@ -3,6 +3,7 @@ package br.edu.insper.al;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Array;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,12 +53,10 @@ public class Login extends HttpServlet {
 			if(status) {
 				int userId = dao.getUserId(user);
 				request.setAttribute("userId", userId);
+				List<Post> posts = dao.getListPosts(userId);
+				request.setAttribute("posts", posts);				
 				RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 				rd.forward(request, response);
-//				out.println("<html><body>");
-//				out.println("Logado " + username);
-//				out.println("<br>user id " + userId);
-//				out.println("</body></html>");
 				dao.close();	
 			}else {
 				request.setAttribute("loged", "username ou senha incorretos");

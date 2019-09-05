@@ -8,38 +8,72 @@
 <title>MAIN</title>
 </head>
 <body class="white-smoke">
+	<%@page import="java.util.*,br.edu.insper.al.*"%>
 	<h1>Boiei</h1>
-
 	<div class="row">
 		<div class="column column-1">
-			<div>aa11</div>
-			<div>aa12</div>
-			<div>aa13</div>
-			<div>aa14</div>
+			<div class="materia-text">Materia 1</div>
+			<%
+				List<Post> posts = (List<Post>) request.getAttribute("posts");
+				for (Post post : posts) {
+					if (post.getMateria() == "Materia 1") {
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
+			%>
+			<form action="Login" method="post">
+				duvida: <br> <input type="text" name="text"> <br>
+				prioridade: <br> <input type="number" name="prioridade"> <br>
+				<%
+				for (Post post : posts) {
+					if (post.getMateria() == "Materia 1") {
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
+			%>
+				<input type="submit" name="AddPost">
+			</form>
+
 		</div>
 		<div class="column column-2">
-			<div>aa21</div>
-			<div>aa22</div>
-			<div>aa23</div>
-			<div>aa24</div>
+			<div class="materia-text">Materia 2</div>
+			<%
+				for (Post post : posts) {
+					if (post.getMateria() == "Materia 2") {
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
+			%>
 		</div>
 		<div class="column column-3">
-			<div>aa31</div>
-			<div>aa32</div>
-			<div>aa33</div>
-			<div>aa34</div>
+			<div class="materia-text">Materia 3</div>
+			<%
+				for (Post post : posts) {
+					if (post.getMateria() == "Materia 3") {
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
+			%>
 		</div>
 		<div class="column column-4">
-			<div>aa41</div>
-			<div>aa42</div>
-			<div>aa43</div>
-			<div>aa44</div>
+			<div class="materia-text">Materia 4</div>
+			<%
+				for (Post post : posts) {
+					if (post.getMateria() == "Materia 4") {
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
+			%>
 		</div>
 		<div class="column column-5">
-			<div>aa51</div>
-			<div>aa52</div>
-			<div>aa53</div>
-			<div>aa54</div>
+			<div class="materia-text">Materia 5</div>
+			<%
+				for (Post post : posts) {
+					if (post.getMateria() == "Materia 5") {
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
+			%>
 		</div>
 	</div>
 

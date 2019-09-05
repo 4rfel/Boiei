@@ -107,11 +107,12 @@ public class DAO {
 		return false;
 	}
 	
-	public List<Post> getListPosts() {
+	public List<Post> getListPosts(int userId) {
 		List<Post> posts = new ArrayList<Post>();
 		try {
 			PreparedStatement stmt = connection.
-			 prepareStatement("SELECT * FROM Posts");
+			 prepareStatement("SELECT * FROM Posts WHERE user_id=?");
+			stmt.setInt(1,userId);
 			ResultSet rs;
 			rs = stmt.executeQuery();
 			while (rs.next()) {
