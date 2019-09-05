@@ -44,6 +44,7 @@ public class Login extends HttpServlet {
 
 		String password = request.getParameter("password");
 		String username = request.getParameter("username");
+		username = username.toLowerCase();
 		if(!password.isEmpty() || !username.isEmpty()) {
 			DAO dao = new DAO();
 			User user= new User();
@@ -54,7 +55,7 @@ public class Login extends HttpServlet {
 				int userId = dao.getUserId(user);
 				request.setAttribute("userId", userId);
 				List<Post> posts = dao.getListPosts(userId);
-				request.setAttribute("posts", posts);				
+				request.setAttribute("posts", posts);			
 				RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 				rd.forward(request, response);
 				dao.close();	
@@ -64,7 +65,7 @@ public class Login extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}else {
-			request.setAttribute("emptyCamps", "campos vazios");
+			request.setAttribute("emptyCampsLogin", "campos vazios");
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}

@@ -13,7 +13,7 @@
 		Username: <br> <input type="text" name="username"> <br>
 		Senha: <br> <input type="password" name="password"> <br>
 		<%
-		String emptyCamps = (String)request.getAttribute("emptyCamps");
+		String emptyCamps = (String)request.getAttribute("emptyCampsLogin");
 		if(emptyCamps!=null){
 			out.println(emptyCamps + "<br>");
 		}
@@ -33,6 +33,10 @@
 		Senha: <br> <input type="password" name="password"> <br>
 		Confirmar Senha: <br> <input type="password" name="passwordCheck"> <br>
 		<%
+		emptyCamps = (String)request.getAttribute("emptyCamps");
+		if(emptyCamps!=null){
+			out.println(emptyCamps + "<br>");
+		}
 		String validUsername = (String)request.getAttribute("isValidUsername");
 		if(validUsername!=null){
 			out.println(validUsername + "<br>");
@@ -40,10 +44,6 @@
 		String samePassword = (String)request.getAttribute("samePassword");
 		if(samePassword!=null){
 			out.println(samePassword + "<br>");
-		}
-		emptyCamps = (String)request.getAttribute("emptyCamps");
-		if(emptyCamps!=null){
-			out.println(emptyCamps + "<br>");
 		}
 %>
 		<br>

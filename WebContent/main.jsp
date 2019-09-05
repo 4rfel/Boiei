@@ -15,23 +15,28 @@
 			<div class="materia-text">Materia 1</div>
 			<%
 				List<Post> posts = (List<Post>) request.getAttribute("posts");
-				for (Post post : posts) {
-					if (post.getMateria() == "Materia 1") {
-						out.println("<div>" + post.getTexto() + "</div>");
-					}
-				}
+				System.out.println(posts);
+				//for (Post post : posts) {
+				//if (post.getMateria() == "Materia 1") {
+				//out.println("<div>" + post.getTexto() + "</div>");
+				//}
+				//}
 			%>
-			<form action="Login" method="post">
-				duvida: <br> <input type="text" name="text"> <br>
-				prioridade: <br> <input type="number" name="prioridade"> <br>
+			<form action="AddPost" method="post">
 				<%
-				for (Post post : posts) {
-					if (post.getMateria() == "Materia 1") {
-						out.println("<div>" + post.getTexto() + "</div>");
+					for (Post post : posts) {
+						if (post.getMateria() == "Materia 1") {
+							out.println("<div>" + post.getTexto() + "</div>");
+						}
 					}
-				}
-			%>
-				<input type="submit" name="AddPost">
+				%>
+				duvida: <br> <input type="text" name="duvida"> <br>
+				prioridade: <br> <input type="text" name="prioridade">
+				<br> <input type='hidden' name='materia' value="materia1">
+				<% String userId = request.getParameter("userId"); %>
+				<input type='hidden' name='userId'
+					value=<%=userId%>> <input
+					type="submit" name="AddPost">
 			</form>
 
 		</div>

@@ -2,10 +2,12 @@ package br.edu.insper.al;
 
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +107,27 @@ public class DAO {
 			e.printStackTrace();
 		}	
 		return false;
+	}
+	
+	public void addPost(Post post) {
+		try {
+			PreparedStatement stmt;
+		
+			String sql = "INSERT INTO Posts" + "(user_id, text, materia, time_of_creation, prioridade) values(?,?,?,?,?)";
+			Date date= new Date(0);
+			Timestamp ts = new Timestamp(date.getTime());
+			stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, post.getUserId());
+			stmt.setString(2, post.getTexto());
+			stmt.setString(3, post.getMateria());
+			stmt.setTimestamp(4, ts);
+			stmt.setInt(5, post.getPrioridade());
+			stmt.execute() ;
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	public List<Post> getListPosts(int userId) {
