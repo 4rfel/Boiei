@@ -4,6 +4,17 @@
 <html>
 <head>
 <link rel="stylesheet" href="master.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
 <title>MAIN</title>
 </head>
@@ -17,17 +28,22 @@
 				String userId = (String) request.getAttribute("userId");
 				List<Post> posts = (List<Post>) request.getAttribute("posts");
 				for (Post post : posts) {
-					System.out.println(post.getMateria());
 					if (post.getMateria().equals("materia1")) {
-						System.out.println("entrou em 1");
-						out.println("<div>" + post.getTexto() + "</div>");
+						out.println("<div class='card-body text-center'>");
+						out.println("<p class='card-text'>" + post.getTexto() + "</p></div>");
+						//out.println("<div>" + post.getTexto() + "</div>");
 					}
 				}
 			%>
-			<form action="AddPost" method="post">
+			<form action="AddPost" method="post" class="padding-left">
 				duvida: <br> <input type="text" name="duvida"> <br>
-				prioridade: <br> <input type="text" name="prioridade">
-				<br> <input type='hidden' name='materia' value="materia1">
+				prioridade: <select class="selectpicker" name="prioridade">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>3</option>
+					<option>5</option>
+				</select> <br> <input type='hidden' name='materia' value="materia1">
 				<input type='hidden' name='userId' value=<%=userId%>> <input
 					type="submit" name="AddPost">
 			</form>
@@ -45,10 +61,16 @@
 			%>
 			<form action="AddPost" method="post">
 				duvida: <br> <input type="text" name="duvida"> <br>
-				prioridade: <br> <input type="text" name="prioridade">
-				<br> <input type='hidden' name='materia' value="materia2">
-				<input type='hidden' name='userId' value=<%=userId%>> <input
-					type="submit" name="AddPost">
+				prioridade: <select class="selectpicker" name="prioridade">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>3</option>
+					<option>5</option>
+					<br>
+					<input type='hidden' name='materia' value="materia2">
+					<input type='hidden' name='userId' value=<%=userId%>>
+					<input type="submit" name="AddPost">
 			</form>
 		</div>
 		<div class="column column-3">
@@ -63,10 +85,16 @@
 			%>
 			<form action="AddPost" method="post">
 				duvida: <br> <input type="text" name="duvida"> <br>
-				prioridade: <br> <input type="text" name="prioridade">
-				<br> <input type='hidden' name='materia' value="materia3">
-				<input type='hidden' name='userId' value=<%=userId%>> <input
-					type="submit" name="AddPost">
+				prioridade: <select class="selectpicker" name="prioridade">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>3</option>
+					<option>5</option>
+					<br>
+					<input type='hidden' name='materia' value="materia3">
+					<input type='hidden' name='userId' value=<%=userId%>>
+					<input type="submit" name="AddPost">
 			</form>
 		</div>
 		<div class="column column-4">
@@ -81,10 +109,16 @@
 			%>
 			<form action="AddPost" method="post">
 				duvida: <br> <input type="text" name="duvida"> <br>
-				prioridade: <br> <input type="text" name="prioridade">
-				<br> <input type='hidden' name='materia' value="materia4">
-				<input type='hidden' name='userId' value=<%=userId%>> <input
-					type="submit" name="AddPost">
+				prioridade: <select class="selectpicker" name="prioridade">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>3</option>
+					<option>5</option>
+					<br>
+					<input type='hidden' name='materia' value="materia4">
+					<input type='hidden' name='userId' value=<%=userId%>>
+					<input type="submit" name="AddPost">
 			</form>
 		</div>
 		<div class="column column-5">
@@ -99,10 +133,16 @@
 			%>
 			<form action="AddPost" method="post">
 				duvida: <br> <input type="text" name="duvida"> <br>
-				prioridade: <br> <input type="text" name="prioridade">
-				<br> <input type='hidden' name='materia' value="materia5">
-				<input type='hidden' name='userId' value=<%=userId%>> <input
-					type="submit" name="AddPost">
+				prioridade: <select class="selectpicker" name="prioridade">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>3</option>
+					<option>5</option>
+					<br>
+					<input type='hidden' name='materia' value="materia5">
+					<input type='hidden' name='userId' value=<%=userId%>>
+					<input type="submit" name="AddPost">
 			</form>
 		</div>
 	</div>

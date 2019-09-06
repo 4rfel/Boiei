@@ -29,6 +29,10 @@
 	display: flex;  
 }
 
+.padding-left{
+	padding-left: 50px;
+}
+
 .column {
 	flex: 10%;
 	margin-left: 5px;
