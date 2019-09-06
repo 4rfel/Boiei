@@ -14,28 +14,21 @@
 		<div class="column column-1">
 			<div class="materia-text">Materia 1</div>
 			<%
+				String userId = (String) request.getAttribute("userId");
 				List<Post> posts = (List<Post>) request.getAttribute("posts");
-				System.out.println(posts);
-				//for (Post post : posts) {
-				//if (post.getMateria() == "Materia 1") {
-				//out.println("<div>" + post.getTexto() + "</div>");
-				//}
-				//}
+				for (Post post : posts) {
+					System.out.println(post.getMateria());
+					if (post.getMateria().equals("materia1")) {
+						System.out.println("entrou em 1");
+						out.println("<div>" + post.getTexto() + "</div>");
+					}
+				}
 			%>
 			<form action="AddPost" method="post">
-				<%
-					for (Post post : posts) {
-						if (post.getMateria() == "Materia 1") {
-							out.println("<div>" + post.getTexto() + "</div>");
-						}
-					}
-				%>
 				duvida: <br> <input type="text" name="duvida"> <br>
 				prioridade: <br> <input type="text" name="prioridade">
 				<br> <input type='hidden' name='materia' value="materia1">
-				<% String userId = request.getParameter("userId"); %>
-				<input type='hidden' name='userId'
-					value=<%=userId%>> <input
+				<input type='hidden' name='userId' value=<%=userId%>> <input
 					type="submit" name="AddPost">
 			</form>
 
@@ -44,41 +37,73 @@
 			<div class="materia-text">Materia 2</div>
 			<%
 				for (Post post : posts) {
-					if (post.getMateria() == "Materia 2") {
+					System.out.println(post.getMateria());
+					if (post.getMateria().equals("materia2")) {
 						out.println("<div>" + post.getTexto() + "</div>");
 					}
 				}
 			%>
+			<form action="AddPost" method="post">
+				duvida: <br> <input type="text" name="duvida"> <br>
+				prioridade: <br> <input type="text" name="prioridade">
+				<br> <input type='hidden' name='materia' value="materia2">
+				<input type='hidden' name='userId' value=<%=userId%>> <input
+					type="submit" name="AddPost">
+			</form>
 		</div>
 		<div class="column column-3">
 			<div class="materia-text">Materia 3</div>
 			<%
 				for (Post post : posts) {
-					if (post.getMateria() == "Materia 3") {
+					System.out.println(post.getMateria());
+					if (post.getMateria().equals("materia3")) {
 						out.println("<div>" + post.getTexto() + "</div>");
 					}
 				}
 			%>
+			<form action="AddPost" method="post">
+				duvida: <br> <input type="text" name="duvida"> <br>
+				prioridade: <br> <input type="text" name="prioridade">
+				<br> <input type='hidden' name='materia' value="materia3">
+				<input type='hidden' name='userId' value=<%=userId%>> <input
+					type="submit" name="AddPost">
+			</form>
 		</div>
 		<div class="column column-4">
 			<div class="materia-text">Materia 4</div>
 			<%
 				for (Post post : posts) {
-					if (post.getMateria() == "Materia 4") {
+					System.out.println(post.getMateria());
+					if (post.getMateria().equals("materia4")) {
 						out.println("<div>" + post.getTexto() + "</div>");
 					}
 				}
 			%>
+			<form action="AddPost" method="post">
+				duvida: <br> <input type="text" name="duvida"> <br>
+				prioridade: <br> <input type="text" name="prioridade">
+				<br> <input type='hidden' name='materia' value="materia4">
+				<input type='hidden' name='userId' value=<%=userId%>> <input
+					type="submit" name="AddPost">
+			</form>
 		</div>
 		<div class="column column-5">
 			<div class="materia-text">Materia 5</div>
 			<%
 				for (Post post : posts) {
-					if (post.getMateria() == "Materia 5") {
+					System.out.println(post.getMateria());
+					if (post.getMateria().equals("materia5")) {
 						out.println("<div>" + post.getTexto() + "</div>");
 					}
 				}
 			%>
+			<form action="AddPost" method="post">
+				duvida: <br> <input type="text" name="duvida"> <br>
+				prioridade: <br> <input type="text" name="prioridade">
+				<br> <input type='hidden' name='materia' value="materia5">
+				<input type='hidden' name='userId' value=<%=userId%>> <input
+					type="submit" name="AddPost">
+			</form>
 		</div>
 	</div>
 

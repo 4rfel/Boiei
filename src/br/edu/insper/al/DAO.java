@@ -113,15 +113,15 @@ public class DAO {
 		try {
 			PreparedStatement stmt;
 		
-			String sql = "INSERT INTO Posts" + "(user_id, text, materia, time_of_creation, prioridade) values(?,?,?,?,?)";
-			Date date= new Date(0);
-			Timestamp ts = new Timestamp(date.getTime());
+			String sql = "INSERT INTO posts" + "(user_id, text, materia, prioridade) values(?,?,?,?)";
+//			Date date= new Date(0);
+//			Timestamp ts = new Timestamp(date.getTime());
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, post.getUserId());
 			stmt.setString(2, post.getTexto());
 			stmt.setString(3, post.getMateria());
-			stmt.setTimestamp(4, ts);
-			stmt.setInt(5, post.getPrioridade());
+//			stmt.setTimestamp(4, ts);
+			stmt.setInt(4, post.getPrioridade());
 			stmt.execute() ;
 			stmt.close();
 		} catch (SQLException e) {
@@ -133,28 +133,54 @@ public class DAO {
 	public List<Post> getListPosts(int userId) {
 		List<Post> posts = new ArrayList<Post>();
 		try {
-			PreparedStatement stmt = connection.
-			 prepareStatement("SELECT * FROM Posts WHERE user_id=?");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Posts WHERE user_id=?");
 			stmt.setInt(1,userId);
-			ResultSet rs;
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
+
 			while (rs.next()) {
 				Post post = new Post();
 				post.setId(rs.getInt("id"));
 				post.setUserId(rs.getInt("user_id"));
-				post.setTexto(rs.getString("texto"));
-				post.setCreationDate(rs.getTimestamp("creation_date"));
+				post.setTexto(rs.getString("text"));
+//				post.setCreationDate(rs.getTimestamp("CreationTime"));
 				post.setMateria(rs.getString("materia"));
 				post.setPrioridade(rs.getInt("prioridade"));
 				posts.add(post);
+			}
 			rs.close();
 			stmt.close();
-				}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return posts;
+	}
+	
+	public void delPost(Post post) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM Posts WHERE id=?");
+			stmt.setInt(1, post.getId());
+			ResultSet rs = stmt.executeQuery();
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void editPost(Post post) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("UPDATE Posts SET text=? WHERE id=?");
+			stmt.setString(1, post.getTexto());
+			stmt.setInt(2, post.getId());
+			ResultSet rs = stmt.executeQuery();
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void close() {

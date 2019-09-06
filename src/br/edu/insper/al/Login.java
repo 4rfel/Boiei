@@ -53,7 +53,8 @@ public class Login extends HttpServlet {
 			boolean status = dao.login(user);
 			if(status) {
 				int userId = dao.getUserId(user);
-				request.setAttribute("userId", userId);
+				String userIdString = String.valueOf(userId);
+				request.setAttribute("userId", userIdString);
 				List<Post> posts = dao.getListPosts(userId);
 				request.setAttribute("posts", posts);			
 				RequestDispatcher rd = request.getRequestDispatcher("main.jsp");

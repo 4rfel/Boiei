@@ -56,7 +56,8 @@ public class AddUser extends HttpServlet {
 				if (userCreated) {
 					PrintWriter out = response.getWriter();
 					int userId = dao.getUserId(user);
-					request.setAttribute("userId", userId);
+					String userIdString = String.valueOf(userId);
+					request.setAttribute("userId", userIdString);
 					RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 					rd.forward(request, response);
 				} else {

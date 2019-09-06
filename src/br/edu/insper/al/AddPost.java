@@ -1,6 +1,7 @@
 package br.edu.insper.al;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,7 +43,6 @@ public class AddPost extends HttpServlet {
 		Post post = new Post();
 		
 		String userIdString = request.getParameter("userId");
-		System.out.println(userIdString);
 		int userId = Integer.valueOf(userIdString);
 		String text = request.getParameter("duvida");
 		String materia = request.getParameter("materia");
@@ -54,9 +54,13 @@ public class AddPost extends HttpServlet {
 		post.setMateria(materia);
 		post.setPrioridade(prioridade);
 		
-		request.setAttribute("userId", userId);
+		dao.addPost(post);
+		List<Post> posts = dao.getListPosts(userId);
+		request.setAttribute("posts", posts);
+		
+		request.setAttribute("userId", userIdString);
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
-		rd.forward(request, response);	
+		rd.forward(request, response);
 		
 		dao.close();
 		
