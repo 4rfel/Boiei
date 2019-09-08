@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DelPost
+ * Servlet implementation class EditPost
  */
-@WebServlet("/DelPost")
-public class DelPost extends HttpServlet {
+@WebServlet("/EditPost")
+public class EditPost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelPost() {
+    public EditPost() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,22 +43,22 @@ public class DelPost extends HttpServlet {
 		
 		String userIdString = request.getParameter("userId");
 		String postIdString = request.getParameter("postId");
+		String duvida = request.getParameter("duvida");
 		int postId = Integer.valueOf(postIdString);
 		
 		int userId = Integer.valueOf(userIdString);
-
 		
 		post.setId(postId);
-		dao.delPost(post);
+		post.setTexto(duvida);
+		dao.editPost(post);
 		
-		request.setAttribute("userId", userIdString);
 		List<Post> posts = dao.getListPosts(userId);
+
+		request.setAttribute("userId", userIdString);
 		request.setAttribute("posts", posts);	
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 		
-		dao.close();
-		
-	}
+		dao.close();	}
 
 }

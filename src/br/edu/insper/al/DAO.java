@@ -160,8 +160,7 @@ public class DAO {
 		try {
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM Posts WHERE id=?");
 			stmt.setInt(1, post.getId());
-			ResultSet rs = stmt.executeQuery();
-			rs.close();
+			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -174,8 +173,7 @@ public class DAO {
 			PreparedStatement stmt = connection.prepareStatement("UPDATE Posts SET text=? WHERE id=?");
 			stmt.setString(1, post.getTexto());
 			stmt.setInt(2, post.getId());
-			ResultSet rs = stmt.executeQuery();
-			rs.close();
+			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
