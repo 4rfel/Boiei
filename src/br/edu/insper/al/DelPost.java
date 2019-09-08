@@ -1,7 +1,6 @@
 package br.edu.insper.al;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddPost
+ * Servlet implementation class DelPost
  */
-@WebServlet("/AddPost")
-public class AddPost extends HttpServlet {
+@WebServlet("/DelPost")
+public class DelPost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddPost() {
+    public DelPost() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,27 +37,15 @@ public class AddPost extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		DAO dao = new DAO();
 		Post post = new Post();
 		
 		String userIdString = request.getParameter("userId");
-		int userId = Integer.valueOf(userIdString);
-		String text = request.getParameter("duvida");
-		String materia = request.getParameter("materia");
-		String prioridadeString = request.getParameter("prioridade");
-		int prioridade = Integer.valueOf(prioridadeString);
-		if(!userIdString.isEmpty() && !text.isEmpty() && prioridadeString.isEmpty()) {
-			post.setUserId(userId);
-			post.setTexto(text);
-			post.setMateria(materia);
-			post.setPrioridade(prioridade);
-			
-			dao.addPost(post);
-			List<Post> posts = dao.getListPosts(userId);
-			request.setAttribute("posts", posts);
-		}
+		String postIdString = request.getParameter("postId");
+		int postId = Integer.valueOf(postIdString);
 		
+		post.setId(postId);
+		dao.delPost(post);
 		
 		request.setAttribute("userId", userIdString);
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");

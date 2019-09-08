@@ -23,20 +23,35 @@
 	<h1>Boiei</h1>
 	<div class="row">
 		<div class="column column-1">
-			<div class="materia-text">Materia 1</div>
+			<div class="center-text">Materia 1</div>
 			<%
 				String userId = (String) request.getAttribute("userId");
 				List<Post> posts = (List<Post>) request.getAttribute("posts");
 				for (Post post : posts) {
+					int postId = post.getId();
 					if (post.getMateria().equals("materia1")) {
-						out.println("<div class='card-body text-center'>");
-						out.println("<p class='card-text'>" + post.getTexto() + "</p></div>");
-						//out.println("<div>" + post.getTexto() + "</div>");
+						out.println("<div class='card-body center-text'>");
+						out.println(
+								"<textarea rows='4' class='card-text'>" + post.getTexto() + "</textarea>");
+						
+						out.println("<form action='DelPost' method='post'>");
+						out.println("<input type='hidden' name='postId' value="+postId+">");
+						out.println("<input type='hidden' name='userId' value="+userId+">");
+						out.println("<input type='submit' name='DelPost' value='Apagar'>" );
+						out.println("</form>");
+						
+						out.println("<form action='EditPost' method='post'>");
+						out.println("<input type='hidden' name='userId' value="+userId+">");
+						out.println("<input type='hidden' name='postId' value="+postId+">");
+						out.println("<input type='submit' name='EditPost' value='Editar'>");
+						out.println("</form>");
+						out.println("</div><br>");
 					}
 				}
 			%>
-			<form action="AddPost" method="post" class="padding-left">
-				duvida: <br> <input type="text" name="duvida"> <br>
+			<form action="AddPost" method="post" class="center-text">
+				duvida:
+				<textarea rows="4" maxlength="255" name="duvida"> </textarea>
 				prioridade: <select class="selectpicker" name="prioridade">
 					<option>1</option>
 					<option>2</option>
