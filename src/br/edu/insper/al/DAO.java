@@ -116,6 +116,7 @@ public class DAO {
 			String sql = "INSERT INTO posts" + "(user_id, text, materia, prioridade) values(?,?,?,?)";
 //			Date date= new Date(0);
 //			Timestamp ts = new Timestamp(date.getTime());
+			System.out.println("AAAAAAAAA");
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, post.getUserId());
 			stmt.setString(2, post.getTexto());

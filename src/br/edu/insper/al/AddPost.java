@@ -52,7 +52,8 @@ public class AddPost extends HttpServlet {
 		String materia = request.getParameter("materia");
 		String prioridadeString = request.getParameter("prioridade");
 		int prioridade = Integer.valueOf(prioridadeString);
-		if (!userIdString.isEmpty() && !text.isEmpty() && prioridadeString.isEmpty()) {
+		if (!text.isEmpty() && !prioridadeString.isEmpty()) {
+			
 			post.setUserId(userId);
 			post.setTexto(text);
 			post.setMateria(materia);

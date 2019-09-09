@@ -2,6 +2,7 @@ package br.edu.insper.al;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,6 +59,8 @@ public class AddUser extends HttpServlet {
 					int userId = dao.getUserId(user);
 					String userIdString = String.valueOf(userId);
 					request.setAttribute("userId", userIdString);
+					List<Post> posts = dao.getListPosts(userId);
+					request.setAttribute("posts", posts);
 					RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 					rd.forward(request, response);
 				} else {
