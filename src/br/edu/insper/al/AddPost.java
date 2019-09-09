@@ -60,13 +60,13 @@ public class AddPost extends HttpServlet {
 			post.setPrioridade(prioridade);
 
 			dao.addPost(post);
-			List<Post> posts = dao.getListPosts(userId);
+			List<Post> posts = dao.getListPosts(userId,"id");
 			request.setAttribute("posts", posts);
 		}
 
-		List<Post> posts = dao.getListPosts(userId);
+		List<Post> posts = dao.getListPosts(userId,"id");
 		request.setAttribute("posts", posts);
-
+		request.setAttribute("orderBy", "id");
 		request.setAttribute("userId", userIdString);
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);

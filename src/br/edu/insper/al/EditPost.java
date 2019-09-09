@@ -52,10 +52,11 @@ public class EditPost extends HttpServlet {
 		post.setTexto(duvida);
 		dao.editPost(post);
 		
-		List<Post> posts = dao.getListPosts(userId);
+		List<Post> posts = dao.getListPosts(userId, "id");
 
 		request.setAttribute("userId", userIdString);
-		request.setAttribute("posts", posts);	
+		request.setAttribute("posts", posts);
+		request.setAttribute("orderBy", "id");
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 		rd.forward(request, response);
 		

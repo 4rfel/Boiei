@@ -21,12 +21,25 @@
 <body class="white-smoke">
 	<%@page import="java.util.*,br.edu.insper.al.*"%>
 	<h1>Boiei</h1>
+
+	<%
+		String userId = (String) request.getAttribute("userId");
+		List<Post> posts = (List<Post>) request.getAttribute("posts");
+		String id = (String) request.getAttribute("id");
+	%>
+	<form method="post" action=Order>
+		orderBy: <select class="selectpicker" name="orderBy">
+			<option>id</option>
+			<option>prioridade</option>
+		</select> <input type='hidden' name='userId' value=<%=userId%>> <input
+			type="submit" name="Order">
+	</form>
+
+
 	<div class="row">
 		<div class="column column-1">
 			<div class="center-text">Materia 1</div>
 			<%
-				String userId = (String) request.getAttribute("userId");
-				List<Post> posts = (List<Post>) request.getAttribute("posts");
 				for (Post post : posts) {
 					int postId = post.getId();
 					if (post.getMateria().equals("materia1")) {
@@ -57,7 +70,7 @@
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
-					<option>3</option>
+					<option>4</option>
 					<option>5</option>
 				</select> <br> <input type='hidden' name='materia' value="materia1">
 				<input type='hidden' name='userId' value=<%=userId%>> <input
@@ -98,9 +111,9 @@
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
-					<option>3</option>
+					<option>4</option>
 					<option>5</option>
-					<br>
+					<br>class="center-text"
 					<input type='hidden' name='materia' value="materia2">
 					<input type='hidden' name='userId' value=<%=userId%>>
 					<input type="submit" name="AddPost">
@@ -139,7 +152,7 @@
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
-					<option>3</option>
+					<option>4</option>
 					<option>5</option>
 					<br>
 					<input type='hidden' name='materia' value="materia3">
@@ -221,7 +234,7 @@
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
-					<option>3</option>
+					<option>4</option>
 					<option>5</option>
 					<br>
 					<input type='hidden' name='materia' value="materia5">

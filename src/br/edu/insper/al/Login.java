@@ -55,8 +55,10 @@ public class Login extends HttpServlet {
 				int userId = dao.getUserId(user);
 				String userIdString = String.valueOf(userId);
 				request.setAttribute("userId", userIdString);
-				List<Post> posts = dao.getListPosts(userId);
-				request.setAttribute("posts", posts);			
+				List<Post> posts = dao.getListPosts(userId, "id");
+				request.setAttribute("posts", posts);	
+				request.setAttribute("orderBy", "id");			
+
 				RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 				rd.forward(request, response);
 				dao.close();	

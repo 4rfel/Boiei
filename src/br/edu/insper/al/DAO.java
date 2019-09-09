@@ -18,7 +18,7 @@ public class DAO {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection  = DriverManager.getConnection(
-					"jdbc:mysql://localhost/Boiei", "Arfel", "R4f43!arafle99");
+					"jdbc:mysql://localhost/BOIEI", "lucas", "lucas12345");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class DAO {
 		try {
 			PreparedStatement stmt;
 		
-			String sql = "INSERT INTO posts" + "(user_id, text, materia, prioridade) values(?,?,?,?)";
+			String sql = "INSERT INTO Posts" + "(user_id, text, materia, prioridade) values(?,?,?,?)";
 //			Date date= new Date(0);
 //			Timestamp ts = new Timestamp(date.getTime());
 			System.out.println("AAAAAAAAA");
@@ -131,10 +131,11 @@ public class DAO {
 		}	
 	}
 	
-	public List<Post> getListPosts(int userId) {
+	public List<Post> getListPosts(int userId, String orderBy) {
 		List<Post> posts = new ArrayList<Post>();
 		try {
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Posts WHERE user_id=?");
+			String sql = "SELECT * FROM Posts WHERE user_id=? ORDER BY "+ orderBy;
+			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1,userId);
 			ResultSet rs = stmt.executeQuery();
 
