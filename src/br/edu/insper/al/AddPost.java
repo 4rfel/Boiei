@@ -51,6 +51,7 @@ public class AddPost extends HttpServlet {
 		String text = request.getParameter("duvida");
 		String materia = request.getParameter("materia");
 		String prioridadeString = request.getParameter("prioridade");
+		String orderBy = request.getParameter("orderBy");
 		int prioridade = Integer.valueOf(prioridadeString);
 		if (!text.isEmpty() && !prioridadeString.isEmpty()) {
 			
@@ -60,11 +61,11 @@ public class AddPost extends HttpServlet {
 			post.setPrioridade(prioridade);
 
 			dao.addPost(post);
-			List<Post> posts = dao.getListPosts(userId,"id");
+			List<Post> posts = dao.getListPosts(userId, orderBy);
 			request.setAttribute("posts", posts);
 		}
 
-		List<Post> posts = dao.getListPosts(userId,"id");
+		List<Post> posts = dao.getListPosts(userId, orderBy);
 		request.setAttribute("posts", posts);
 		request.setAttribute("orderBy", "id");
 		request.setAttribute("userId", userIdString);
