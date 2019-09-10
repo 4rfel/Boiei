@@ -43,6 +43,7 @@ public class DelPost extends HttpServlet {
 		
 		String userIdString = request.getParameter("userId");
 		String postIdString = request.getParameter("postId");
+		String orderBy = request.getParameter("orderBy");
 		int postId = Integer.valueOf(postIdString);
 		
 		int userId = Integer.valueOf(userIdString);
@@ -52,7 +53,7 @@ public class DelPost extends HttpServlet {
 		dao.delPost(post);
 		
 		request.setAttribute("userId", userIdString);
-		List<Post> posts = dao.getListPosts(userId,"id");
+		List<Post> posts = dao.getListPosts(userId, orderBy);
 		request.setAttribute("posts", posts);
 		request.setAttribute("orderBy", "id");
 		RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
