@@ -1,0 +1,20 @@
+CREATE DATABASE Boiei;
+USE Boiei;
+
+create table Users(
+     id int not null auto_increment,
+     username varchar(50) not null,
+     password varchar(60) not null,
+     primary key (id)
+    );
+
+CREATE TABLE Posts(
+	id INT NOT NULL AUTO_INCREMENT,
+	user_id INT ,
+	text VARCHAR(256) NOT NULL,
+	materia VARCHAR(20) NOT NULL,
+	time_of_creation TIMESTAMP NOT NULL,
+	prioridade INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (user_id) REFERENCES Users(id)
+);
