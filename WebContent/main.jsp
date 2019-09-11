@@ -229,7 +229,7 @@ margin-left{
 				<option>1</option>
 				<option>2</option>
 				<option>3</option>
-				<option>3</option>
+				<option>4</option>
 				<option>5</option>
 			</select> <input type='hidden' name='materia' value="materia4"> <input
 				type='hidden' name='userId' value=<%=userId%>> <input
