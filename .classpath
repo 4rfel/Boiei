@@ -14,7 +14,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/arfom/Desktop/insper/4 semestre/TecWeb/apache-tomcat-9.0.22/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/arfom/Desktop/insper/4 semestre/TecWeb/apache-tomcat-9.0.22/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/home/borg/TecWeb/apache-tomcat-9.0.24/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/home/borg/TecWeb/apache-tomcat-9.0.24/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

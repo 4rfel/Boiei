@@ -26,9 +26,14 @@ h1 {
 	font-size: 6rem;
 }
 
+.button {
+	margin-left: 10px;	
+	
 
+}
 .AA {
-	font-size: 2rem
+	font-size: 2rem;
+	margin-left: 10px;
 }
 margin-left{
 	margin-left: 10px;	
@@ -41,9 +46,14 @@ margin-left{
 	List<Post> posts = (List<Post>) request.getAttribute("posts");
 	String orderBy = (String) request.getAttribute("orderBy");
 %>
+     <form action="index.jsp" method="get" target="_blank" class = "margin">
+        <p class="button">
+         <button type="submit">Sair</button>
+         </p>
+      </form>
 <form action="Order" method="post"; >
 	<p class="AA">
-		orderBy: <select class="selectpicker" name="orderBy">
+		Ordenar: <select class="selectpicker" name="orderBy">
 	</p>
 	<%
 		if (orderBy.equals("id")) {
@@ -61,6 +71,7 @@ margin-left{
 	</select> <input type='hidden' name='userId' value=<%=userId%>> <input
 		type="submit" name="Order">
 </form>
+
 <div class="row margin-left">
 	<div class="column column-1">
 		<div class="center-text">Materia 1</div>

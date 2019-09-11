@@ -21,12 +21,25 @@
 .column-5{
 	background-color: #408080;
 }
-
+.column-SignUp{
+	background-color: #3895D3;
+	text-align: left;
+}
+.column-Login{
+	background-color: #58CCED;
+	text-align: left;
+}
 .white-smoke{
 	background-color: #c0c0c0;
 }
 .grey{
 	background-color: #505050;
+}
+.side-side{
+  	margin: auto;
+	display: inline-block;
+	margin-left: 20px;
+	
 }
 
 .row {
