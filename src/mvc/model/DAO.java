@@ -1,13 +1,10 @@
-package br.edu.insper.al;
+package mvc.model;
 
-import java.sql.Array;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class DAO {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection  = DriverManager.getConnection(
-					"jdbc:mysql://localhost/Boiei", "Oi", "Prof");
+					"jdbc:mysql://localhost/Boiei", "Arfel", "R4f43!arafle99");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,14 +109,14 @@ public class DAO {
 	public void addPost(Post post) {
 		try {
 			PreparedStatement stmt;
+			System.out.println(post.getUserId());
 		
-			String sql = "INSERT INTO Posts" + "(user_id, text, materia, prioridade) values(?,?,?,?)";
+			String sql = "INSERT INTO Posts (user_id, text, materia, prioridade) values(?,?,?,?)";
 //			Date date= new Date(0);
 //			Timestamp ts = new Timestamp(date.getTime());
-			System.out.println("AAAAAAAAA");
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, post.getUserId());
-			stmt.setString(2, post.getTexto());
+			stmt.setString(2, post.getDuvida());
 			stmt.setString(3, post.getMateria());
 //			stmt.setTimestamp(4, ts);
 			stmt.setInt(4, post.getPrioridade());
@@ -131,19 +128,19 @@ public class DAO {
 		}	
 	}
 	
-	public List<Post> getListPosts(int userId, String orderBy) {
+	public List<Post> getListPosts(User user, String orderBy) {
 		List<Post> posts = new ArrayList<Post>();
 		try {
 			String sql = "SELECT * FROM Posts WHERE user_id=? ORDER BY "+ orderBy;
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setInt(1,userId);
+			stmt.setInt(1,user.getId());
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				Post post = new Post();
-				post.setId(rs.getInt("id"));
+				post.setPostId(rs.getInt("id"));
 				post.setUserId(rs.getInt("user_id"));
-				post.setTexto(rs.getString("text"));
+				post.setDuvida(rs.getString("text"));
 //				post.setCreationDate(rs.getTimestamp("CreationTime"));
 				post.setMateria(rs.getString("materia"));
 				post.setPrioridade(rs.getInt("prioridade"));
@@ -161,7 +158,7 @@ public class DAO {
 	public void delPost(Post post) {
 		try {
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM Posts WHERE id=?");
-			stmt.setInt(1, post.getId());
+			stmt.setInt(1, post.getPostId());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -173,8 +170,8 @@ public class DAO {
 	public void editPost(Post post) {
 		try {
 			PreparedStatement stmt = connection.prepareStatement("UPDATE Posts SET text=? WHERE id=?");
-			stmt.setString(1, post.getTexto());
-			stmt.setInt(2, post.getId());
+			stmt.setString(1, post.getDuvida());
+			stmt.setInt(2, post.getPostId());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {

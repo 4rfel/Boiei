@@ -1,0 +1,58 @@
+.column-1{
+	background-color: #ff8080;
+}
+
+.column-2{
+	background-color: #ffff80;
+}
+
+.center-text{
+	text-align: center;
+}
+
+.column-3{
+	background-color: pink;
+}
+
+.column-4{
+	background-color: #8080ff;
+}
+
+.column-5{
+	background-color: #408080;
+}
+.column-SignUp{
+	background-color: #3895D3;
+	text-align: left;
+}
+.column-Login{
+	background-color: #58CCED;
+	text-align: left;
+}
+.white-smoke{
+	background-color: #c0c0c0;
+}
+.grey{
+	background-color: #505050;
+}
+.side-side{
+  	margin: auto;
+	display: inline-block;
+	margin-left: 20px;
+	
+}
+
+.row {
+	margin-top: 50px;
+	margin-left: 50px;
+	margin-right: 50px;
+	display: flex;  
+}
+
+.column {
+	flex: 10%;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 70%;
+	overflow-y: auto;
+}

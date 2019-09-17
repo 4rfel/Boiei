@@ -7,14 +7,6 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
 
 <title>MAIN</title>
@@ -27,31 +19,31 @@ h1 {
 }
 
 .button {
-	margin-left: 10px;	
-	
-
+	margin-left: 10px;
 }
+
 .AA {
 	font-size: 2rem;
 	margin-left: 10px;
 }
-margin-left{
-	margin-left: 10px;	
+
+margin-left {
+	margin-left: 10px;
 }
 </style>
-<%@page import="java.util.*,br.edu.insper.al.*"%>
+<%@page import="java.util.*,mvc.model.*"%>
 <h1>Boiei</h1>
 <%
-	String userId = (String) request.getAttribute("userId");
-	List<Post> posts = (List<Post>) request.getAttribute("posts");
-	String orderBy = (String) request.getAttribute("orderBy");
+	List<Post> posts = (List<Post>) session.getAttribute("posts");
+	String orderBy = (String) session.getAttribute("orderBy");
 %>
-     <form action="index.jsp" method="get" target="_blank" class = "margin">
-        <p class="button">
-         <button type="submit">Sair</button>
-         </p>
-      </form>
-<form action="Order" method="post"; >
+
+<form action="sairController" method="post" class="margin">
+	<input type="submit" value="Sair">
+</form>
+
+
+<form action="OrderController" method="post" >
 	<p class="AA">
 		Ordenar: <select class="selectpicker" name="orderBy">
 	</p>
@@ -68,8 +60,7 @@ margin-left{
 	<%
 		}
 	%>
-	</select> <input type='hidden' name='userId' value=<%=userId%>> <input
-		type="submit" name="Order">
+	</select> <input type="submit" value="Order">
 </form>
 
 <div class="row margin-left">
@@ -78,41 +69,36 @@ margin-left{
 		<%
 			for (Post post : posts) {
 				if (post.getMateria().equals("materia1")) {
-					int postId = post.getId();
+					int postId = post.getPostId();
 					out.println("<div class='card-body center-text'>");
 
-					out.println("<form action='EditPost' method='post' id='formId'>");
-					out.println("<textarea class='card-text' name='duvida' form='formId'>" + post.getTexto()
+					out.println("<form action='EditPostController' method='post' id='formId'>");
+					out.println("<textarea class='card-text' name='duvida' form='formId'>" + post.getDuvida()
 							+ "</textarea>");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='submit' name='EditPost' value='Editar'>");
+					out.println("<input type='submit' value='EditPost' value='Editar'>");
 					out.println("</form>");
 
-					out.println("<form action='DelPost' method='post'>");
+					out.println("<form action='DelPostController' method='post'>");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
-					out.println("<input type='submit' name='DelPost' value='Apagar'>");
+					out.println("<input type='submit' value='DelPost' value='Apagar'>");
 					out.println("</form>");
 
 					out.println("</div><br>");
 				}
 			}
 		%>
-		<form action="AddPost" method="post" class="center-text">
+		<form action="addPostController" method="post" class="center-text">
 			<div class="center-text">duvida:</div>
 			<textarea rows="4" maxlength="255" name="duvida"> </textarea>
-			<br>
 			prioridade: <select class="selectpicker" name="prioridade">
 				<option>1</option>
 				<option>2</option>
 				<option>3</option>
 				<option>4</option>
 				<option>5</option>
-			</select> <br>
-			<input type='hidden' name='materia' value="materia1"> <input
-				type='hidden' name='userId' value=<%=userId%>> <input
-				type="submit" name="AddPost">
+			</select> <input type='hidden' name='materia' value="materiaq"> <input
+				type="submit" value="AddPost">
 		</form>
 
 	</div>
@@ -120,29 +106,27 @@ margin-left{
 		<div class="center-text">Materia 2</div>
 		<%
 			for (Post post : posts) {
-				int postId = post.getId();
+				int postId = post.getPostId();
 				if (post.getMateria().equals("materia2")) {
 					out.println("<div class='card-body center-text'>");
 
-					out.println("<form action='EditPost' method='post' id='formId'>");
-					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getTexto()
+					out.println("<form action='EditPostController' method='post' id='formId'>");
+					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getDuvida()
 							+ "</textarea>");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='submit' name='EditPost' value='Editar'>");
+					out.println("<input type='submit' value='EditPost' value='Editar'>");
 					out.println("</form>");
 
-					out.println("<form action='DelPost' method='post'>");
+					out.println("<form action='DelPostController' method='post'>");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
-					out.println("<input type='submit' name='DelPost' value='Apagar'>");
+					out.println("<input type='submit' value='DelPost' value='Apagar'>");
 					out.println("</form>");
 
 					out.println("</div><br>");
 				}
 			}
 		%>
-		<form action="AddPost" method="post" class="center-text">
+		<form action="addPostController" method="post" class="center-text">
 			<div class="center-text">duvida:</div>
 			<textarea rows="4" maxlength="255" name="duvida"> </textarea>
 			prioridade: <select class="selectpicker" name="prioridade">
@@ -152,37 +136,34 @@ margin-left{
 				<option>4</option>
 				<option>5</option>
 			</select> <input type='hidden' name='materia' value="materia2"> <input
-				type='hidden' name='userId' value=<%=userId%>> <input
-				type="submit" name="AddPost">
+				type="submit" value="AddPost">
 		</form>
 	</div>
 	<div class="column column-3">
 		<div class="center-text">Materia 3</div>
 		<%
 			for (Post post : posts) {
-				int postId = post.getId();
+				int postId = post.getPostId();
 				if (post.getMateria().equals("materia3")) {
 					out.println("<div class='card-body center-text'>");
 
-					out.println("<form action='EditPost' method='post' id='formId'>");
-					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getTexto()
+					out.println("<form action='EditPostController' method='post' id='formId'>");
+					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getDuvida()
 							+ "</textarea>");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='submit' name='EditPost' value='Editar'>");
+					out.println("<input type='submit' value='EditPost' value='Editar'>");
 					out.println("</form>");
 
-					out.println("<form action='DelPost' method='post'>");
+					out.println("<form action='DelPostController' method='post'>");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
-					out.println("<input type='submit' name='DelPost' value='Apagar'>");
+					out.println("<input type='submit' value='DelPost' value='Apagar'>");
 					out.println("</form>");
 
 					out.println("</div><br>");
 				}
 			}
 		%>
-		<form action="AddPost" method="post" class="center-text">
+		<form action="addPostController" method="post" class="center-text">
 			<div class="center-text">duvida:</div>
 			<textarea rows="4" maxlength="255" name="duvida"> </textarea>
 			prioridade: <select class="selectpicker" name="prioridade">
@@ -192,37 +173,34 @@ margin-left{
 				<option>4</option>
 				<option>5</option>
 			</select> <input type='hidden' name='materia' value="materia3"> <input
-				type='hidden' name='userId' value=<%=userId%>> <input
-				type="submit" name="AddPost">
+				type="submit" value="AddPost">
 		</form>
 	</div>
 	<div class="column column-4">
 		<div class="center-text">Materia 4</div>
 		<%
 			for (Post post : posts) {
-				int postId = post.getId();
+				int postId = post.getPostId();
 				if (post.getMateria().equals("materia4")) {
 					out.println("<div class='card-body center-text'>");
 
-					out.println("<form action='EditPost' method='post' id='formId'>");
-					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getTexto()
+					out.println("<form action='EditPostController' method='post' id='formId'>");
+					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getDuvida()
 							+ "</textarea>");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='submit' name='EditPost' value='Editar'>");
+					out.println("<input type='submit' value='EditPost' value='Editar'>");
 					out.println("</form>");
 
-					out.println("<form action='DelPost' method='post'>");
+					out.println("<form action='DelPostController' method='post'>");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
-					out.println("<input type='submit' name='DelPost' value='Apagar'>");
+					out.println("<input type='submit' value='DelPost' value='Apagar'>");
 					out.println("</form>");
 
 					out.println("</div><br>");
 				}
 			}
 		%>
-		<form action="AddPost" method="post" class="center-text">
+		<form action="addPostController" method="post" class="center-text">
 			<div class="center-text">duvida:</div>
 			<textarea rows="4" maxlength="255" name="duvida"> </textarea>
 			prioridade: <select class="selectpicker" name="prioridade">
@@ -231,38 +209,35 @@ margin-left{
 				<option>3</option>
 				<option>4</option>
 				<option>5</option>
-			</select> <input type='hidden' name='materia' value="materia4"> <input
-				type='hidden' name='userId' value=<%=userId%>> <input
-				type="submit" name="AddPost">
+			</select> <input type='hidden' name='materia' value="materia4"><input
+				type="submit" value="AddPost">
 		</form>
 	</div>
 	<div class="column column-5">
 		<div class="center-text">Materia 5</div>
 		<%
 			for (Post post : posts) {
-				int postId = post.getId();
+				int postId = post.getPostId();
 				if (post.getMateria().equals("materia5")) {
 					out.println("<div class='card-body center-text'>");
 
-					out.println("<form action='EditPost' method='post' id='formId'>");
-					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getTexto()
+					out.println("<form action='EditPostController' method='post' id='formId'>");
+					out.println("<textarea  class='card-text' name='duvida' form='formId'>" + post.getDuvida()
 							+ "</textarea>");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='submit' name='EditPost' value='Editar'>");
+					out.println("<input type='submit' value='EditPost' value='Editar'>");
 					out.println("</form>");
 
-					out.println("<form action='DelPost' method='post'>");
+					out.println("<form action='DelPostController' method='post'>");
 					out.println("<input type='hidden' name='postId' value=" + postId + ">");
-					out.println("<input type='hidden' name='userId' value=" + userId + ">");
-					out.println("<input type='submit' name='DelPost' value='Apagar'>");
+					out.println("<input type='submit' value='DelPost' value='Apagar'>");
 					out.println("</form>");
 
 					out.println("</div><br>");
 				}
 			}
 		%>
-		<form action="AddPost" method="post" class="center-text">
+		<form action="addPostController" method="post" class="center-text">
 			<div class="center-text">duvida:</div>
 			<textarea rows="4" maxlength="255" name="duvida"> </textarea>
 			prioridade: <select class="selectpicker" name="prioridade">
@@ -271,9 +246,8 @@ margin-left{
 				<option>3</option>
 				<option>4</option>
 				<option>5</option>
-			</select> <input type='hidden' name='materia' value="materia5"> <input
-				type='hidden' name='userId' value=<%=userId%>> <input
-				type="submit" name="AddPost">
+			</select> <input type='hidden' name='materia' value="materia5"><input
+				type="submit" value="AddPost">
 		</form>
 	</div>
 </div>
