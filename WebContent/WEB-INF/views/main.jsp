@@ -97,7 +97,7 @@ margin-left {
 				<option>3</option>
 				<option>4</option>
 				<option>5</option>
-			</select> <input type='hidden' name='materia' value="materiaq"> <input
+			</select> <input type='hidden' name='materia' value="materia1"> <input
 				type="submit" value="AddPost">
 		</form>
 
